@@ -1,0 +1,42 @@
+﻿@model Broker
+@{
+  ViewData["Title"] = "Détails courtier";
+}
+
+<div class="container p-3">
+  <div class="row pt-4">
+    <div class="col-6">
+      <h2 class="text-primary">détail courtier</h2>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th>Nom de famille</th>
+        <th>Prénom</th>
+        <th>Courriel</th>
+        <th>Numéro de téléphone</th>
+        <th>Modifications</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td width="30%">@Model.Lastname</td>
+        <td width="30%">@Model.Firstname</td>
+        <td width="20%">@Model.Mail</td>
+        <td width="20%">@Model.PhoneNumber</td>
+        <td width="40%">
+          <div class="col-6 d-inline-flex align-content-between w-100">
+            <a asp-controller="Broker" asp-action="Details" asp-route-Id="@Model.Id" class="btn btn-info d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
+            <a asp-controller="Broker" asp-action="Update" asp-route-Id="@Model.Id" class="btn btn-primary d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+            <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@Model.Id" class="btn btn-danger d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a class="btn btn-primary w-35" asp-area="" asp-controller="Broker" asp-action="Create">Ajouter un nouveau courtier</a>
+
+</div>
