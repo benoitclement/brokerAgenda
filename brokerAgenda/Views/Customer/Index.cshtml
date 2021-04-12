@@ -7,10 +7,8 @@
 <div class="container p-3">
   <div class="row pt-4">
     <div class="col-6">
-      <h2 class="text-primary">Liste des courtiers</h2>
+      <h2 class="text-primary">Liste des clients</h2>
     </div>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Create">Ajouter un nouveau courtier</a>
-
   </div>
 
   @if(Model.Count() > 0)
@@ -18,23 +16,30 @@
         <table class="table table-bordered table-striped" style="width:100%">
           <thead>
             <tr>
+              <th>Id</th>
               <th>Nom de famille</th>
               <th>Prénom</th>
-              <th>Courriel</th>
-              <th>Numéro de téléphone</th>
+              <th>Modifications</th>
             </tr>
           </thead>
           <tbody>
-            @foreach(var broker in Model)
+            @foreach(var customer in Model)
         {
           <tr>
-            <td width="20%">@broker.Lastname</td>
-            <td width="20%">@broker.Firstname</td>
-            <td width="20%">@broker.Mail</td>
-            <td width="20%">@broker.PhoneNumber</td>
+            <td width="20%">@customer.Id</td>
+            <td width="20%">@customer.Lastname</td>
+            <td width="20%">@customer.Firstname</td>
+            <td width="40%">
+              <div class="col-6 d-inline-flex align-content-between w-100">
+                <a asp-controller="Customer" asp-action="Details" asp-route-Id="@customer.Id" class="btn btn-info d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
+                <a asp-controller="Customer" asp-action="Update" asp-route-Id="@customer.Id" class="btn btn-primary d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+                <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@customer.Id" class="btn btn-danger d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+              </div>
+            </td>
           </tr>
         }
           </tbody>
         </table>
       }
+    <a class="btn btn-primary w-35" asp-area="" asp-controller="Customer" asp-action="Create">Ajouter un nouveau client</a>
 </div>

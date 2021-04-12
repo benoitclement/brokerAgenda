@@ -16,6 +16,7 @@
         <table class="table table-bordered table-striped" style="width:100%">
           <thead>
             <tr>
+              <th>Id</th>
               <th>Nom de famille</th>
               <th>Prénom</th>
               <th>Modifications</th>
@@ -25,8 +26,9 @@
             @foreach(var broker in Model)
         {
           <tr>
-            <td width="30%">@broker.Lastname</td>
-            <td width="30%">@broker.Firstname</td>
+            <td width="20%">@broker.Id</td>
+            <td width="20%">@broker.Lastname</td>
+            <td width="20%">@broker.Firstname</td>
             <td width="40%">
               <div class="col-6 d-inline-flex align-content-between w-100">
                 <a asp-controller="Broker" asp-action="Details" asp-route-Id="@broker.Id" class="btn btn-info d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>

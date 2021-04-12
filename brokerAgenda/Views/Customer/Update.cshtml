@@ -1,14 +1,14 @@
 ﻿@model Customer
 @{
-    ViewData["Title"] = "Ajouter entrée client";
+    ViewData["Title"] = "Modifier entrée client";
 }
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Update">
   <div class="border p-3">
     @*validation message for all entries. not used here*@
     @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
     <div class="form-group row">
-      <h2 class="text-black-50 pl-3">Ajouter une entrée client</h2>
+      <h2 class="text-black-50 pl-3">Modifier une entrée client</h2>
     </div>
     <div class="row">
       <div class="col-12">
@@ -42,7 +42,7 @@
         <div class="form-group row">
           <div class="col-8 offset-2 row">
             <div class="col">
-              <input type="submit" class="btn btn-info w-75" value="Ajouter" />
+              <input type="submit" class="btn btn-info w-75" value="Modifier" />
             </div>
             <div class="col">
               <a asp-action="Index" class="btn btn-danger w-75">Retour</a>

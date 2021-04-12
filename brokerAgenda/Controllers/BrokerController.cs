@@ -56,8 +56,6 @@ namespace brokerAgenda.Controllers
     }
 
     // GET-Delete
-    [HttpPost]
-    [ValidateAntiForgeryToken]
     public IActionResult Delete(int? id)
     {
       if (id == null || id == 0)
@@ -85,6 +83,36 @@ namespace brokerAgenda.Controllers
       _db.Brokers.Remove(obj);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    // GET-Update
+    public IActionResult Update(int? id)
+    {
+      if (id == null || id == 0)
+      {
+        return NotFound();
+      }
+      var obj = _db.Brokers.Find(id);
+      if (obj == null)
+      {
+        return NotFound();
+      }
+      return View(obj);
+    }
+
+    // POST-Update
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Update(Broker obj)
+    {
+      if (ModelState.IsValid)
+      {
+        _db.Brokers.Update(obj);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+
+      }
+      return View(obj);
     }
   }
 }

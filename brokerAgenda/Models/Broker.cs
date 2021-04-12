@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 #nullable disable
@@ -17,26 +16,26 @@ namespace brokerAgenda.Models
         [Key]
         public int Id { get; set; }
         
-        [DisplayName("Nom de famille")]
+        [Display(Name = "Nom de famille")]
         [DataType(DataType.Text)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "veuillez saisir uniquement des lettres")]
+        [RegularExpression(@"^[a-zA-Z]+[ \-']?[[a-zA-Z]+[ \-']?]*[a-zA-Z]+$", ErrorMessage = "Veuillez saisir un nom usuel")]
         [Required(ErrorMessage = "Veuillez saisir un nom de famille")]
         public string Lastname { get; set; }
         
-        [DisplayName("Prénom")]
+        [Display(Name = "Prénom")]
         [DataType(DataType.Text)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "veuillez saisir uniquement des lettres")]
+        [RegularExpression(@"^[a-zA-Z]+[ \-']?[[a-zA-Z]+[ \-']?]*[a-zA-Z]+$", ErrorMessage = "Veuillez saisir un prénom usuel")]
         [Required(ErrorMessage = "Veuillez saisir un prénom")]
         public string Firstname { get; set; }
         
-        [DisplayName("Courriel")]
+        [Display(Name = "Courriel")]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression(@"^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$", ErrorMessage = "veuillez saisir une adresse courriel valide")]
+        [RegularExpression(@"^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$", ErrorMessage = "Veuillez saisir une adresse courriel valide")]
         [Required(ErrorMessage = "Veuillez saisir une adresse courriel")]
         [EmailAddress(ErrorMessage = "Veuillez saisir une adresse courriel valide")]
         public string Mail { get; set; }
         
-        [DisplayName("Numéro de téléphone")]
+        [Display(Name = "Numéro de téléphone")]
         [RegularExpression(@"^0[1-9]\d{8}$", ErrorMessage = "Veuillez saisir un numéro de téléphone français en 10 chiffres")]
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "Veuillez saisir un numéro de téléphone")]

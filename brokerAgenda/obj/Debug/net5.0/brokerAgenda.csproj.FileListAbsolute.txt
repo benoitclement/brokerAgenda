@@ -437,3 +437,7 @@ C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\D
 C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\Debug\net5.0\Razor\Views\Customer\Create.cshtml.g.cs
 C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\Debug\net5.0\Razor\Views\Broker\Details.cshtml.g.cs
 C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\Debug\net5.0\Razor\Views\Broker\Delete.cshtml.g.cs
+C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\Debug\net5.0\Razor\Views\Customer\Delete.cshtml.g.cs
+C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\Debug\net5.0\Razor\Views\Customer\Details.cshtml.g.cs
+C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\Debug\net5.0\Razor\Views\Broker\Update.cshtml.g.cs
+C:\Users\Benoît\code\lamanu\exos\brokerage_firm\brokerAgenda\brokerAgenda\obj\Debug\net5.0\Razor\Views\Customer\Update.cshtml.g.cs

@@ -1,42 +1,38 @@
-﻿@model Broker
+﻿@model Customer
 @{
-  ViewData["Title"] = "Supprimer entrée courtier";
+    ViewData["Title"] = "Supprimer entrée client";
 }
 
 <form method="post" asp-action="DeletePost">
   <input asp-for="Id" hidden />
   <div class="border p-3">
+    @*validation message for all entries. not used here*@
+    @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
     <div class="form-group row">
-      <h2 class="text-black-50 pl-3">Supprimer une entrée courtier</h2>
+      <h2 class="text-black-50 pl-3">Supprimer une entrée client</h2>
     </div>
     <div class="row">
       <div class="col-12">
         <div class="form-group row">
-          <div class="col-3">
+          <div class="col-sm-6 col-lg-3 col-md- mb-3">
             <label asp-for="Lastname"></label>
-          </div>
-          <div class="col-3">
-            <label asp-for="Firstname"></label>
-          </div>
-          <div class="col-3">
-            <label asp-for="Mail"></label>
-          </div>
-          <div class="col-3">
-            <label asp-for="PhoneNumber"></label>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-3">
             <input asp-for="Lastname" disabled class="form-control" />
           </div>
-          <div class="col-3">
+          <div class="col-sm-6 col-lg-3 mb-3">
+            <label asp-for="Firstname"></label>
             <input asp-for="Firstname" disabled class="form-control" />
           </div>
-          <div class="col-3">
+          <div class="col-sm-6 col-lg-3 mb-3">
+            <label asp-for="Mail"></label>
             <input asp-for="Mail" disabled class="form-control" />
           </div>
-          <div class="col-3">
+          <div class="col-sm-6 col-lg-3 mb-3">
+            <label asp-for="PhoneNumber"></label>
             <input asp-for="PhoneNumber" disabled class="form-control" />
+          </div>
+          <div class="col-sm-6 col-lg-3 mb-3">
+            <label asp-for="Budget">Budget</label>
+            <input asp-for="Budget" disabled class="form-control" />
           </div>
         </div>
         <div class="form-group row">
@@ -53,8 +49,6 @@
     </div>
 </form>
 
-@section Scripts{
-  @{
-    <partial name="_ValidationScriptsPartial" />
-  }
+@section Scripts{ 
+    @{ <partial name="_ValidationScriptsPartial" />}
 }
