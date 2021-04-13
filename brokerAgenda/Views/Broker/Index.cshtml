@@ -9,7 +9,6 @@
       <h2 class="text-primary">Liste des courtiers</h2>
       <a class="btn btn-primary col-3" asp-area="" asp-controller="Broker" asp-action="Create">Ajouter un nouveau courtier</a>
   </div>
-
   @if(Model.Count() > 0)
       {
         <table class="table table-bordered table-striped" style="width:100%">
@@ -24,15 +23,15 @@
           <tbody>
             @foreach(var broker in Model)
         {
-          <tr class="@(broker.Id == ViewBag.modifiedId ? "bg-success" : "")">
+          <tr style="@(broker.Id == Convert.ToInt32(TempData["ModifiedId"]) ? "border: 2px solid limegreen" : "")">
             <td width="20%">@broker.Id</td>
             <td width="20%">@broker.Lastname</td>
             <td width="20%">@broker.Firstname</td>
             <td width="40%">
               <div class="col-6 d-inline-flex align-content-between w-100">
-                <a asp-controller="Broker" asp-action="Details" asp-route-Id="@broker.Id" class="btn btn-info d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
-                <a asp-controller="Broker" asp-action="Update" asp-route-Id="@broker.Id" class="btn btn-primary d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
-                <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@broker.Id" class="btn btn-danger d-inline-flex mx-1"><img width="20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+                <a asp-controller="Broker" asp-action="Details" asp-route-Id="@broker.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
+                <a asp-controller="Broker" asp-action="Update" asp-route-Id="@broker.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+                <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@broker.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
               </div>
             </td>
           </tr>
