@@ -1,6 +1,6 @@
 ﻿@model Broker
 @{
-    ViewData["Title"] = "Modifier entrée courtier";
+  ViewData["Title"] = "Modifier entrée courtier";
 }
 
 <form method="post" asp-action="Update">
@@ -11,53 +11,52 @@
     <div class="form-group row">
       <h2 class="text-black-50 pl-3">Modifier une entrée courtier</h2>
     </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="form-group row">
-            <div class="col-3">
-              <label asp-for="Lastname"></label>
-            </div>
-            <div class="col-3">
-              <label asp-for="Firstname"></label>
-            </div>
-            <div class="col-3">
-              <label asp-for="Mail"></label>
-            </div>
-            <div class="col-3">
-              <label asp-for="PhoneNumber"></label>
-            </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group row">
+          <div class="col-3">
+            <label asp-for="Lastname"></label>
           </div>
-          <div class="form-group row">
-              <div class="col-3">
-                <input asp-for="Lastname" class="form-control" />
-                <span asp-validation-for="Lastname" class="text-danger"></span> 
-              </div>
-              <div class="col-3">
-                <input asp-for="Firstname" class="form-control" />
-                <span asp-validation-for="Firstname" class="text-danger"></span> 
-              </div>
-              <div class="col-3">
-                <input asp-for="Mail" class="form-control" />
-                <span asp-validation-for="Mail" class="text-danger"></span> 
-              </div>
-              <div class="col-3">
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span> 
-              </div>
+          <div class="col-3">
+            <label asp-for="Firstname"></label>
           </div>
-          <div class="form-group row">
-              <div class="col-8 offset-2 row">
-                  <div class="col">
-                      <input type="submit" class="btn btn-info w-75" value="Modifier" />
-                  </div>
-                  <div class="col">
-                      <a asp-action="Index" class="btn btn-danger w-75">Retour</a>
-                  </div>
-              </div>
+          <div class="col-3">
+            <label asp-for="Mail"></label>
           </div>
-  </div>
+          <div class="col-3">
+            <label asp-for="PhoneNumber"></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-3">
+            <input asp-for="Lastname" class="form-control" />
+            <span asp-validation-for="Lastname" class="text-danger"></span>
+          </div>
+          <div class="col-3">
+            <input asp-for="Firstname" class="form-control" />
+            <span asp-validation-for="Firstname" class="text-danger"></span>
+          </div>
+          <div class="col-3">
+            <input asp-for="Mail" class="form-control" />
+            <span asp-validation-for="Mail" class="text-danger"></span>
+          </div>
+          <div class="col-3">
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <div class="col-8 d-flex justify-content-between mx-auto mt-4">
+            <input type="submit" class="btn btn-primary col-4" value="Modifier" />
+            <a asp-action="Index" class="btn btn-success col-4">Retour</a>
+          </div>
+        </div>
+      </div>
 </form>
 
-@section Scripts{ 
-    @{ <partial name="_ValidationScriptsPartial" />}
+@section Scripts{
+  @{
+    <partial name="_ValidationScriptsPartial" />
+  }
 }
