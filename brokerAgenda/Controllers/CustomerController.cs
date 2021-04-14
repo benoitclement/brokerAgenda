@@ -108,7 +108,9 @@ namespace brokerAgenda.Controllers
       {
         _db.Customers.Update(obj);
         _db.SaveChanges();
-        TempData["ModifiedId"] = obj.Id;
+
+        TempData["modification"] = "update";
+        TempData["customerName"] = obj.Firstname + obj.Lastname;
         return RedirectToAction("Index");
       }
       return View(obj);
