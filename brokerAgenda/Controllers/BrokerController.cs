@@ -112,7 +112,6 @@ namespace brokerAgenda.Controllers
         _db.SaveChanges();
         TempData["ModifiedId"] = obj.Id;
         return RedirectToAction("Index");
-
       }
       return View(obj);
     }

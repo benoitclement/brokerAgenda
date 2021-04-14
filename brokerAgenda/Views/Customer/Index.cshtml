@@ -5,10 +5,9 @@
 }
 
 <div class="container p-3">
-  <div class="row pt-4">
-    <div class="col-6">
+  <div class="d-flex justify-content-between mb-3">
       <h2 class="text-primary">Liste des clients</h2>
-    </div>
+      <a class="btn btn-primary col-3" asp-area="" asp-controller="Customer" asp-action="Create">Ajouter un nouveau client</a>
   </div>
 
   @if(Model.Count() > 0)
@@ -25,7 +24,7 @@
           <tbody>
             @foreach(var customer in Model)
         {
-          <tr>
+          <tr style="@(customer.Id == Convert.ToInt32(TempData["ModifiedId"]) ? "border: 2px solid limegreen" : "")">
             <td width="20%">@customer.Id</td>
             <td width="20%">@customer.Lastname</td>
             <td width="20%">@customer.Firstname</td>
@@ -41,5 +40,4 @@
           </tbody>
         </table>
       }
-    <a class="btn btn-primary w-35" asp-area="" asp-controller="Customer" asp-action="Create">Ajouter un nouveau client</a>
 </div>

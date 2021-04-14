@@ -18,13 +18,13 @@ namespace brokerAgenda.Models
 
         [Display(Name = "Nom de famille")]
         [DataType(DataType.Text)]
-        [RegularExpression(@"^[a-zA-Z]+[ \-']?[[a-zA-Z]+[ \-']?]*[a-zA-Z]+$", ErrorMessage = "Veuillez saisir un nom usuel")]
+        [RegularExpression(@"^[a-zA-Z'àâéèêîôùûäëïçÀÂÉÈÎÔÙÛÄËÏÇ\s-]{1,75}$", ErrorMessage = "Veuillez saisir un nom usuel")]
         [Required(ErrorMessage = "Veuillez saisir un nom de famille")]
         public string Lastname { get; set; }
         
         [Display(Name = "Prénom")]
         [DataType(DataType.Text)]
-        [RegularExpression(@"^[a-zA-Z]+[ \-']?[[a-zA-Z]+[ \-']?]*[a-zA-Z]+$", ErrorMessage = "Veuillez saisir un prénom usuel")]
+        [RegularExpression(@"^[a-zA-Z'àâéèêîôùûäëïçÀÂÉÈÎÔÙÛÄËÏÇ\s-]{1,75}$", ErrorMessage = "Veuillez saisir un prénom usuel")]
         [Required(ErrorMessage = "Veuillez saisir un prénom")]
         public string Firstname { get; set; }
 

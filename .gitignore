@@ -17,6 +17,8 @@
 mono_crash.*
 
 # Build results
+.brokerAgenda/obj/Debug/ # test to check in case following lines don't work TODO:remove
+.brokerAgenda/bin/Debug/ # test to check in case following lines don't work TODO:remove
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
