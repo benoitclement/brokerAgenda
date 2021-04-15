@@ -70,30 +70,109 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+.modification-container {
+  position: fixed;
+  width: 480px;
+  height: 140px;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.modification-details {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 400px;
+  height: 100px;
+  bottom: 40px;
+  right: -420px;
+  padding: 0 40px;
+  z-index: 100;
+  animation: cubic-bezier(0.175, 0.885, 0.32, 1.275) 4s details-slideLeft;
+}
+.modification-details>p {
+  margin: 0;
+  text-align: center;
+}
+.modification-details.create {
+  background-color: lightskyblue;
+}
+.modification-details.delete {
+  background-color: pink;
+}
+.modification-details.update {
+  background-color: lightgreen;
+}
+.table td {
+  vertical-align: middle;
+}
+
+.created-entry {
+  transition: background-color 2s;
+  border: 2px solid dodgerblue;
+  animation: fade_blue 2s linear 0s alternate;
+  -webkit-animation: fade_blue 2s linear 0s alternate;
+}
+
 .modified-entry {
   transition: background-color 2s;
   border: 2px solid limegreen;
   animation: fade_green 2s linear 0s alternate;
   -webkit-animation: fade_green 2s linear 0s alternate;
+}
+
+@-webkit-keyframes fade_blue {
+  from {
+    background-color: dodgerblue;
   }
+
+  to {
+    background-color: inherit;
+  }
+}
+
+@keyframes fade_blue {
+  from {
+    background-color: dodgerblue;
+  }
+
+  to {
+    background-color: inherit;
+  }
+}
 
 @-webkit-keyframes fade_green {
-    from {
-      background-color: limegreen;
-    }
-
-    to {
-      background-color: inherit;
-    }
+  from {
+    background-color: limegreen;
   }
 
-  @keyframes fade_green{
-    from {
-      background-color: limegreen;
-    }
-
-    to {
-      background-color: inherit;
-    }
+  to {
+    background-color: inherit;
   }
+}
+
+@keyframes fade_green {
+  from {
+    background-color: limegreen;
+  }
+
+  to {
+    background-color: inherit;
+  }
+}
+
+@keyframes details-slideLeft {
+  0% {transform: translate(0);}
+  10% {transform: translate(-460px);}
+  90% {transform: translate(-460px);}
+  100% {transform: translate(0);}
+}
+
+@-webkit-keyframes details-slideLeft {
+  0% {transform: translate(0);}
+  10% {transform: translate(-460px);}
+  90% {transform: translate(-460px);}
+  100% {transform: translate(0);}
+}
 

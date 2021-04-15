@@ -37,7 +37,9 @@ namespace brokerAgenda.Controllers
       {
         _db.Customers.Add(obj);
         _db.SaveChanges();
-        TempData["ModifiedId"] = obj.Id;
+        TempData["modifiedId"] = obj.Id;
+        TempData["modification"] = "create";
+        TempData["customerName"] = obj.Firstname + " " + obj.Lastname;
         return RedirectToAction("Index");
       }
       return View(obj);
@@ -81,6 +83,8 @@ namespace brokerAgenda.Controllers
       }
       _db.Customers.Remove(obj);
       _db.SaveChanges();
+      TempData["modification"] = "delete";
+      TempData["customerName"] = obj.Firstname + " " + obj.Lastname;
       return RedirectToAction("Index");
     }
 
@@ -109,8 +113,9 @@ namespace brokerAgenda.Controllers
         _db.Customers.Update(obj);
         _db.SaveChanges();
 
+        TempData["modifiedId"] = obj.Id;
         TempData["modification"] = "update";
-        TempData["customerName"] = obj.Firstname + obj.Lastname;
+        TempData["customerName"] = obj.Firstname + " " + obj.Lastname;
         return RedirectToAction("Index");
       }
       return View(obj);

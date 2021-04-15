@@ -2,6 +2,13 @@
 
 @{
   ViewData["Title"] = "liste des clients";
+  string modifType = null;
+  if (TempData["modification"] != null) modifType = TempData["modification"].ToString();
+  int? modifiedId = null;
+  if (TempData["modifiedId"] != null)
+  {
+    modifiedId = Convert.ToInt32(TempData["modifiedId"]);
+  }
 }
 
 <div class="container p-3">
@@ -12,44 +19,52 @@
 
   @if (Model.Count() > 0)
   {
-  <table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nom de famille</th>
-        <th>Prénom</th>
-        <th>Modifications</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var customer in Model)
-      {
-      <tr class="@TempData["modification"]">
-        <td width="20%">@customer.Id</td>
-        <td width="20%">@customer.Lastname</td>
-        <td width="20%">@customer.Firstname</td>
-        <td width="40%">
-          <div class="col-6 d-inline-flex align-content-between w-100">
-            <a asp-controller="Customer" asp-action="Details" asp-route-Id="@customer.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
-            <a asp-controller="Customer" asp-action="Update" asp-route-Id="@customer.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
-            <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@customer.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
-          </div>
-        </td>
-      </tr>
-  }
-    </tbody>
-  </table>
+    <table class="table table-bordered table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nom de famille</th>
+          <th>Prénom</th>
+          <th>Modifications</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var customer in Model)
+        {
+          string trClass = "";
+          if (modifiedId != null && modifiedId == customer.Id)
+          {
+            if (modifType == "create") trClass = "created-entry";
+            else if (modifType == "update") trClass = "updated-entry";
+          }
+          <tr class="@trClass">
+            <td width="20%">@customer.Id</td>
+            <td width="20%">@customer.Lastname</td>
+            <td width="20%">@customer.Firstname</td>
+            <td width="40%">
+              <div class="col-6 d-inline-flex align-content-between w-100">
+                <a asp-controller="Customer" asp-action="Details" asp-route-Id="@customer.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
+                <a asp-controller="Customer" asp-action="Update" asp-route-Id="@customer.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+                <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@customer.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   }
 </div>
-@{ 
-  if (TempData["modification"] != null)
+@{
+  if (modifType != null)
   {
-    string verb = "";
-    if (TempData["modification"].ToString() == "creation") verb = "créé";
-    else if (TempData["modification"].ToString() == "update") verb = "modifié";
-    else if (TempData["modification"].ToString() == "delete") verb = "supprimé";
-  <details class="@TempData["modification"]">
-    <summary>@TempData["customerName"] a bien été @verb</summary>
-  </details>
+    string action = "";
+    if (modifType == "create") action = "créé";
+    else if (modifType == "update") action = "modifié";
+    else if (modifType == "delete") action = "supprimé";
+    <div class="modification-container">
+      <div class="modification-details @TempData["modification"]">
+        <p>Le cient <strong>@TempData["customerName"]</strong> a bien été @action.</p>
+      </div>
+    </div>
   }
 }
