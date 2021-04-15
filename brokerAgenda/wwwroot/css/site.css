@@ -72,16 +72,18 @@ body {
 
 .modification-container {
   position: fixed;
+  overflow: hidden;
+  pointer-events: none;
   width: 480px;
   height: 140px;
   bottom: 0;
   right: 0;
-  overflow: hidden;
 }
 
 .modification-details {
   position: fixed;
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 400px;
   height: 100px;
