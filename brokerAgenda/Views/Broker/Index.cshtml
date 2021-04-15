@@ -1,7 +1,14 @@
 ﻿@model IEnumerable<Broker>
 
 @{
-    ViewData["Title"] = "liste des courtiers";
+  ViewData["Title"] = "liste des courtiers";
+  string modifType = null;
+  if (TempData["modification"] != null) modifType = TempData["modification"].ToString();
+  int? modifiedId = null;
+  if (TempData["modifiedId"] != null)
+  {
+    modifiedId = Convert.ToInt32(TempData["modifiedId"]);
+  }
 }
   
 <div class="container p-3">
@@ -23,7 +30,13 @@
       <tbody>
         @foreach (var broker in Model)
         {
-          <tr class="@(broker.Id == Convert.ToInt32(TempData["ModifiedId"]) ? "modified-entry" : "")">
+          string trClass = "";
+          if (modifiedId != null && modifiedId == broker.Id)
+          {
+            if (modifType == "create") trClass = "created-entry";
+            else if (modifType == "update") trClass = "updated-entry";
+          }
+          <tr class="@(trClass)">
             <td width="20%">@broker.Id</td>
             <td width="20%">@broker.Lastname</td>
             <td width="20%">@broker.Firstname</td>
@@ -40,3 +53,17 @@
     </table>
   }
 </div>
+@{
+  if (modifType != null)
+  {
+    string action = "";
+    if (modifType == "create") action = "créé";
+    else if (modifType == "update") action = "modifié";
+    else if (modifType == "delete") action = "supprimé";
+    <div class="modification-container">
+      <div class="modification-details @TempData["modification"]">
+        <p>Le courtier <strong>@TempData["brokerName"]</strong> a bien été @action.</p>
+      </div>
+    </div>
+  }
+}

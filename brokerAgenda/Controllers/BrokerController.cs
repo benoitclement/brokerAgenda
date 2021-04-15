@@ -16,10 +16,9 @@ namespace brokerAgenda.Controllers
     {
       _db = db;
     }
-    // Default GET for Index
+    // GET-Index
     public IActionResult Index()
     {
-      ViewBag.Greeting = "Hey babe.";
       IEnumerable<Broker> objList = _db.Brokers;
       return View(objList);
     }
@@ -50,7 +49,9 @@ namespace brokerAgenda.Controllers
       {
         _db.Brokers.Add(obj);
         _db.SaveChanges();
-        TempData["ModifiedId"] = obj.Id;
+        TempData["modifiedId"] = obj.Id;
+        TempData["modification"] = "create";
+        TempData["brokerName"] = obj.Firstname + " " + obj.Lastname;
         return RedirectToAction("Index");
       }
       return View(obj);
@@ -83,6 +84,8 @@ namespace brokerAgenda.Controllers
       }
       _db.Brokers.Remove(obj);
       _db.SaveChanges();
+      TempData["modification"] = "delete";
+      TempData["brokerName"] = obj.Firstname + " " + obj.Lastname;
       return RedirectToAction("Index");
     }
 
@@ -110,6 +113,9 @@ namespace brokerAgenda.Controllers
       {
         _db.Brokers.Update(obj);
         _db.SaveChanges();
+        TempData["modifiedId"] = obj.Id;
+        TempData["modification"] = "update";
+        TempData["brokerName"] = obj.Firstname + " " + obj.Lastname;
         return RedirectToAction("Index");
       }
       return View(obj);

@@ -16,10 +16,22 @@ namespace brokerAgenda.Controllers
     {
       _db = db;
     }
+    //GET-index
     public IActionResult Index()
     {
       IEnumerable<Customer> objList = _db.Customers;
       return View(objList);
+    }
+
+    // GET-Details
+    public IActionResult Details(int? id)
+    {
+      var obj = _db.Customers.Find(id);
+      if (obj == null)
+      {
+        return NotFound();
+      }
+      return View(obj);
     }
 
     // GET-Create
@@ -41,17 +53,6 @@ namespace brokerAgenda.Controllers
         TempData["modification"] = "create";
         TempData["customerName"] = obj.Firstname + " " + obj.Lastname;
         return RedirectToAction("Index");
-      }
-      return View(obj);
-    }
-
-    // GET-Details
-    public IActionResult Details(int? id)
-    {
-      var obj = _db.Customers.Find(id);
-      if (obj == null)
-      {
-        return NotFound();
       }
       return View(obj);
     }

@@ -64,6 +64,7 @@ body {
 }
 .footer {
   position: absolute;
+  z-index: -1;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
@@ -78,6 +79,7 @@ body {
   height: 140px;
   bottom: 0;
   right: 0;
+  z-index: 1;
 }
 
 .modification-details {
@@ -90,22 +92,26 @@ body {
   bottom: 40px;
   right: -420px;
   padding: 0 40px;
-  z-index: 100;
   animation: cubic-bezier(0.175, 0.885, 0.32, 1.275) 4s details-slideLeft;
 }
+
 .modification-details>p {
   margin: 0;
   text-align: center;
 }
+
 .modification-details.create {
   background-color: lightskyblue;
 }
+
 .modification-details.delete {
   background-color: pink;
 }
+
 .modification-details.update {
   background-color: lightgreen;
 }
+
 .table td {
   vertical-align: middle;
 }
