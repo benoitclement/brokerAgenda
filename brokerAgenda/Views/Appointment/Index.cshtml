@@ -49,8 +49,7 @@
           <tr class="@trClass">
             <td width="20%">@appointment.IdBrokerNavigation.Firstname @appointment.IdBrokerNavigation.Lastname</td>
             <td width="20%">@appointment.IdCustomerNavigation.Firstname @appointment.IdCustomerNavigation.Lastname</td>
-            <td width="20%">@appointment.DateHour</td>
-            @*<td width="20%">@appointment.Subject</td>*@
+            <td width="20%">@appointment.DateHour.ToString("dd-MM-yyyy hh:mm tt")</td>
             <td width="40%">
               <div class="col-6 d-inline-flex align-content-between w-100">
                 <a asp-controller="Appointment" asp-action="Details" asp-route-Id="@appointment.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Détails</a>
