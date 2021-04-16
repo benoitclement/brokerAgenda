@@ -17,15 +17,14 @@ namespace brokerAgenda.Controllers
       _db = db;
     }
     // GET-Index
-    public IActionResult Index(string sortOrder)
+    public IActionResult Index(string SortOrder)
     {
       IEnumerable<Broker> objList = _db.Brokers;
-      //if (sortOrder == null) sortOrder = "id";
-      objList = sortOrder switch //new syntax for switch _ is default
+      objList = SortOrder switch //new syntax for switch _ is default
       {
-        "id" => objList.OrderBy(o => o.Id),
-        "lastname" => objList.OrderBy(o => o.Lastname),
-        "firstname" => objList.OrderBy(o => o.Firstname),
+        "Id" => objList.OrderBy(o => o.Id),
+        "LastName" => objList.OrderBy(o => o.Lastname),
+        "FirstName" => objList.OrderBy(o => o.Firstname),
         _ => objList.OrderBy(o => o.Id),
       };
       return View(objList);

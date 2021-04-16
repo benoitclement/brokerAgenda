@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Appointment>
+
+@{
+  ViewData["Title"] = "liste des rendez-vous";
+  string modifType = null;
+  if (TempData["modification"] != null) modifType = TempData["modification"].ToString();
+  int? modifiedId = null;
+  if (TempData["modifiedId"] != null)
+  {
+    modifiedId = Convert.ToInt32(TempData["modifiedId"]);
+  }
+}
+
+<div class="container p-3">
+  <div class="d-flex justify-content-between mb-3">
+    <h2 class="text-primary">Liste des rendez-vous</h2>
+    <a class="btn btn-primary col-3" asp-area="" asp-controller="Appointment" asp-action="Create">Ajouter un nouveau rendez-vous</a>
+  </div>
+
+  @if (Model.Count() > 0)
+  {
+    <table class="table table-bordered table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>Nom du courtier
+            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="brokername" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
+          <th>Nom du client
+            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="clientname" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
+          <th>Date et heure
+            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="datetime" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
+          <th>Objet du RDV
+            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="subject" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
+          <th>Modifications</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var appointment in Model)
+        {
+          string trClass = "";
+          if (modifiedId != null && modifiedId == appointment.Id)
+          {
+            if (modifType == "create") trClass = "created-entry";
+            else if (modifType == "update") trClass = "updated-entry";
+          }
+          <tr class="@trClass">
+            <td width="20%">@appointment.IdBrokerNavigation.Firstname @appointment.IdBrokerNavigation.Lastname</td>
+            <td width="20%">@appointment.IdCustomerNavigation.Firstname @appointment.IdCustomerNavigation.Lastname</td>
+            <td width="20%">@appointment.DateHour</td>
+            <td width="20%">@appointment.Subject</td>
+            <td width="40%">
+              <div class="col-6 d-inline-flex align-content-between w-100">
+                <a asp-controller="Appointment" asp-action="Details" asp-route-Id="@appointment.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
+                <a asp-controller="Appointment" asp-action="Update" asp-route-Id="@appointment.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+                <a asp-controller="Appointment" asp-action="Delete" asp-route-Id="@appointment.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
+@{
+  if (modifType != null)
+  {
+    string action = "";
+    if (modifType == "create") action = "créé";
+    else if (modifType == "update") action = "modifié";
+    else if (modifType == "delete") action = "supprimé";
+    <div class="modification-container">
+      <div class="modification-details @TempData["modification"]">
+        <p>Le cient <strong>@TempData["customerName"]</strong> a bien été @action.</p>
+      </div>
+    </div>
+  }
+}
