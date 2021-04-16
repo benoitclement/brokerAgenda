@@ -22,10 +22,13 @@
       <thead>
         <tr>
           <th>Id
-            <a asp-controller="Broker" asp-action="Index" asp-route-column="" class=""><img style="width: 20px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
-            <a asp-controller="Broker" asp-action="Index" asp-route-column="" class=""><img style="width: 20px" class="" src="~/images/sort-ascending.svg" alt="sort ascending icon" title="sort ascending icon" /></a>
-          <th>Nom de famille</th>
-          <th>Prénom</th>
+            <a asp-controller="Broker" asp-action="Index" asp-route-sortorder="id" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          <th>Nom de famille
+            <a asp-controller="Broker" asp-action="Index" asp-route-sortorder="lastname" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
+          <th>Prénom
+            <a asp-controller="Broker" asp-action="Index" asp-route-sortorder="firstname" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
           <th>Modifications</th>
         </tr>
       </thead>

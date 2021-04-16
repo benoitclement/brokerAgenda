@@ -22,9 +22,14 @@
     <table class="table table-bordered table-striped" style="width:100%">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Nom de famille</th>
-          <th>Prénom</th>
+          <th>Id
+            <a asp-controller="Customer" asp-action="Index" asp-route-sortorder="id" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          <th>Nom de famille
+            <a asp-controller="Customer" asp-action="Index" asp-route-sortorder="lastname" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
+          <th>Prénom
+            <a asp-controller="Customer" asp-action="Index" asp-route-sortorder="firstname" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+          </th>
           <th>Modifications</th>
         </tr>
       </thead>
