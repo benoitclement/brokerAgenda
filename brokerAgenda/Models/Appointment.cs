@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -25,7 +26,10 @@ namespace brokerAgenda.Models
     [Display(Name = "Id client")]
     public int IdCustomer { get; set; }
 
+    [ForeignKey("IdBroker")]
     public virtual Broker IdBrokerNavigation { get; set; }
+
+    [ForeignKey("IdCustomer")]
     public virtual Customer IdCustomerNavigation { get; set; }
   }
 }

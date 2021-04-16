@@ -1,0 +1,44 @@
+﻿@model Appointment
+@{
+  ViewData["Title"] = "Détails rendez-vous";
+}
+
+<div class="container p-3">
+  <div class="row pt-4">
+    <div class="col-6">
+      <h2 class="text-primary">Détail rendez-vous</h2>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th>Courtier</th>
+        <th>Client</th>
+        <th>Date et heure</th>
+        <th>Objet du rendez-vous</th>
+        <th>Modifications</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td width="30%">@Model.IdBrokerNavigation.Lastname @Model.IdBrokerNavigation.Firstname</td>
+        <td width="30%">@Model.IdCustomerNavigation.Lastname @Model.IdCustomerNavigation.Firstname</td>
+        <td width="20%">@Model.DateHour</td>
+        <td width="20%">@Model.Subject</td>
+        <td width="40%">
+          <div class="col-6 d-inline-flex align-content-between w-100">
+            <a asp-controller="Appointment" asp-action="Details" asp-route-Id="@Model.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
+            <a asp-controller="Appointment" asp-action="Update" asp-route-Id="@Model.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+            <a asp-controller="Appointment" asp-action="Delete" asp-route-Id="@Model.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-group row mt-4">
+    <a class="btn btn-success col-4 mx-auto" asp-area="" asp-controller="Appointment" asp-action="Index">Retour</a>
+  </div>
+
+</div>

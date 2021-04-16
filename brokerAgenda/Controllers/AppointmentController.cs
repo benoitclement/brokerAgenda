@@ -23,7 +23,26 @@ namespace brokerAgenda.Controllers
         obj.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == obj.IdBroker);
         obj.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == obj.IdCustomer);
       }
-      return View();
+      return View(objList);
     }
+    
+    // GET-Details
+    public IActionResult Details(int? id)
+    {
+      Appointment AppointmentDetails = new Appointment();
+      if (id == null || id == 0)
+      {
+        return NotFound();
+      }
+      AppointmentDetails = _db.Appointments.Find(id);
+      if (AppointmentDetails == null)
+      {
+        return NotFound();
+      }
+      AppointmentDetails.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == AppointmentDetails.IdBroker);
+      AppointmentDetails.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == AppointmentDetails.IdCustomer);
+      return View(AppointmentDetails);
+    }
+
   }
 }
