@@ -19,26 +19,26 @@ namespace brokerAgenda.Controllers
     //GET-index
     public IActionResult Index(string SortOrder)
     {
-      IEnumerable<Customer> objList = _db.Customers;
-      objList = SortOrder switch //new syntax for switch _ is default
+      IEnumerable<Customer> customerList = _db.Customers;
+      customerList = SortOrder switch //new syntax for switch _ is default
       {
-        "Id" => objList.OrderBy(o => o.Id),
-        "LastName" => objList.OrderBy(o => o.Lastname),
-        "FirstName" => objList.OrderBy(o => o.Firstname),
-        _ => objList.OrderBy(o => o.Id),
+        "Id" => customerList.OrderBy(row => row.Id),
+        "LastName" => customerList.OrderBy(row => row.Lastname),
+        "FirstName" => customerList.OrderBy(row => row.Firstname),
+        _ => customerList.OrderBy(row => row.Id),
       };
-      return View(objList);
+      return View(customerList);
     }
 
     // GET-Details
     public IActionResult Details(int? id)
     {
-      var obj = _db.Customers.Find(id);
-      if (obj == null)
+      var customer = _db.Customers.Find(id);
+      if (customer == null)
       {
         return NotFound();
       }
-      return View(obj);
+      return View(customer);
     }
 
     // GET-Create
@@ -50,18 +50,18 @@ namespace brokerAgenda.Controllers
     // POST-Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Customer obj)
+    public IActionResult Create(Customer customer)
     {
       if (ModelState.IsValid)
       {
-        _db.Customers.Add(obj);
+        _db.Customers.Add(customer);
         _db.SaveChanges();
-        TempData["modifiedId"] = obj.Id;
+        TempData["modifiedId"] = customer.Id;
         TempData["modification"] = "create";
-        TempData["customerName"] = obj.Firstname + " " + obj.Lastname;
+        TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
         return RedirectToAction("Index");
       }
-      return View(obj);
+      return View(customer);
     }
 
     //GET Delete
@@ -71,12 +71,12 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      var obj = _db.Customers.Find(id);
-      if (obj == null)
+      var customer = _db.Customers.Find(id);
+      if (customer == null)
       {
         return NotFound();
       }
-      return View(obj);
+      return View(customer);
     }
     
     //POST Delete
@@ -84,15 +84,15 @@ namespace brokerAgenda.Controllers
     [ValidateAntiForgeryToken]
     public IActionResult DeletePost(int? id)
     {
-      var obj = _db.Customers.Find(id);
-      if (obj == null)
+      var customer = _db.Customers.Find(id);
+      if (customer == null)
       {
         return NotFound();
       }
-      _db.Customers.Remove(obj);
+      _db.Customers.Remove(customer);
       _db.SaveChanges();
       TempData["modification"] = "delete";
-      TempData["customerName"] = obj.Firstname + " " + obj.Lastname;
+      TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
       return RedirectToAction("Index");
     }
 
@@ -103,30 +103,30 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      var obj = _db.Customers.Find(id);
-      if (obj == null)
+      var customer = _db.Customers.Find(id);
+      if (customer == null)
       {
         return NotFound();
       }
-      return View(obj);
+      return View(customer);
     }
 
     //POST Update
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Update(Customer obj)
+    public IActionResult Update(Customer customer)
     {
       if (ModelState.IsValid)
       {
-        _db.Customers.Update(obj);
+        _db.Customers.Update(customer);
         _db.SaveChanges();
 
-        TempData["modifiedId"] = obj.Id;
+        TempData["modifiedId"] = customer.Id;
         TempData["modification"] = "update";
-        TempData["customerName"] = obj.Firstname + " " + obj.Lastname;
+        TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
         return RedirectToAction("Index");
       }
-      return View(obj);
+      return View(customer);
     }
 
   }

@@ -23,16 +23,16 @@
       <thead>
         <tr>
           <th>Nom du courtier
-            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="brokername" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+            <a asp-controller="Appointment" asp-action="Index" asp-route-SortOrder="BrokerName" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
           </th>
           <th>Nom du client
-            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="clientname" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+            <a asp-controller="Appointment" asp-action="Index" asp-route-SortOrder="CustomerName" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
           </th>
           <th>Date et heure
-            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="datetime" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+            <a asp-controller="Appointment" asp-action="Index" asp-route-SortOrder="DateTime" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
           </th>
           @*<th>Objet du RDV
-            <a asp-controller="Appointment" asp-action="Index" asp-route-sortorder="subject" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+            <a asp-controller="Appointment" asp-action="Index" asp-route-SortOrder="Subject" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
           </th>*@
           <th>Modifications</th>
         </tr>
@@ -72,7 +72,7 @@
     else if (modifType == "delete") action = "supprimé";
     <div class="modification-container">
       <div class="modification-details @TempData["modification"]">
-        <p>Le cient <strong>@TempData["customerName"]</strong> a bien été @action.</p>
+        <p>Le rendez-vous avec <strong>@TempData["customerName"]</strong>, le <strong>@TempData["dateTime"]</strong> a bien été @action.</p>
       </div>
     </div>
   }

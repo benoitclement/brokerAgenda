@@ -19,26 +19,26 @@ namespace brokerAgenda.Controllers
     // GET-Index
     public IActionResult Index(string SortOrder)
     {
-      IEnumerable<Broker> objList = _db.Brokers;
-      objList = SortOrder switch //new syntax for switch _ is default
+      IEnumerable<Broker> brokerList = _db.Brokers;
+      brokerList = SortOrder switch //new syntax for switch _ is default
       {
-        "Id" => objList.OrderBy(o => o.Id),
-        "LastName" => objList.OrderBy(o => o.Lastname),
-        "FirstName" => objList.OrderBy(o => o.Firstname),
-        _ => objList.OrderBy(o => o.Id),
+        "Id" => brokerList.OrderBy(row => row.Id),
+        "LastName" => brokerList.OrderBy(row => row.Lastname),
+        "FirstName" => brokerList.OrderBy(row => row.Firstname),
+        _ => brokerList.OrderBy(row => row.Id),
       };
-      return View(objList);
+      return View(brokerList);
     }
 
     // GET-Details
     public IActionResult Details(int? id)
     {
-      var obj = _db.Brokers.Find(id);
-      if (obj == null)
+      var broker = _db.Brokers.Find(id);
+      if (broker == null)
       {
         return NotFound();
       }
-      return View(obj);
+      return View(broker);
     }
 
     // GET-Create
@@ -50,18 +50,18 @@ namespace brokerAgenda.Controllers
     // POST-Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Broker obj)
+    public IActionResult Create(Broker broker)
     {
       if (ModelState.IsValid)
       {
-        _db.Brokers.Add(obj);
+        _db.Brokers.Add(broker);
         _db.SaveChanges();
-        TempData["modifiedId"] = obj.Id;
+        TempData["modifiedId"] = broker.Id;
         TempData["modification"] = "create";
-        TempData["brokerName"] = obj.Firstname + " " + obj.Lastname;
+        TempData["brokerName"] = broker.Firstname + " " + broker.Lastname;
         return RedirectToAction("Index");
       }
-      return View(obj);
+      return View(broker);
     }
 
     // GET-Delete
@@ -71,12 +71,12 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      var obj = _db.Brokers.Find(id);
-      if (obj == null)
+      var broker = _db.Brokers.Find(id);
+      if (broker == null)
       {
         return NotFound();
       }
-      return View(obj);
+      return View(broker);
     }
 
     // POST-Delete
@@ -84,15 +84,15 @@ namespace brokerAgenda.Controllers
     [ValidateAntiForgeryToken]
     public IActionResult DeletePost(int? id)
     {
-      var obj = _db.Brokers.Find(id);
-      if (obj == null)
+      var broker = _db.Brokers.Find(id);
+      if (broker == null)
       {
         return NotFound();
       }
-      _db.Brokers.Remove(obj);
+      _db.Brokers.Remove(broker);
       _db.SaveChanges();
       TempData["modification"] = "delete";
-      TempData["brokerName"] = obj.Firstname + " " + obj.Lastname;
+      TempData["brokerName"] = broker.Firstname + " " + broker.Lastname;
       return RedirectToAction("Index");
     }
 
@@ -103,29 +103,29 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      var obj = _db.Brokers.Find(id);
-      if (obj == null)
+      var broker = _db.Brokers.Find(id);
+      if (broker == null)
       {
         return NotFound();
       }
-      return View(obj);
+      return View(broker);
     }
 
     // POST-Update
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Update(Broker obj)
+    public IActionResult Update(Broker broker)
     {
       if (ModelState.IsValid)
       {
-        _db.Brokers.Update(obj);
+        _db.Brokers.Update(broker);
         _db.SaveChanges();
-        TempData["modifiedId"] = obj.Id;
+        TempData["modifiedId"] = broker.Id;
         TempData["modification"] = "update";
-        TempData["brokerName"] = obj.Firstname + " " + obj.Lastname;
+        TempData["brokerName"] = broker.Firstname + " " + broker.Lastname;
         return RedirectToAction("Index");
       }
-      return View(obj);
+      return View(broker);
     }
   }
 }
