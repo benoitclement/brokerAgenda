@@ -17,15 +17,22 @@ namespace brokerAgenda.Controllers
     {
       _db = db;
     }
-    public IActionResult Index()
+    public IActionResult Index(string SortOrder)
     {
-      IEnumerable<Appointment> objList = _db.Appointments;
-      foreach (var obj in objList)
+      IEnumerable<Appointment> appointmentList = _db.Appointments;
+      foreach (var appointment in appointmentList)
       {
-        obj.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == obj.IdBroker);
-        obj.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == obj.IdCustomer);
+        appointment.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == appointment.IdBroker);
+        appointment.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
       }
-      return View(objList);
+      appointmentList = SortOrder switch //new syntax for switch _ is default
+      {
+        "BrokerName" => appointmentList.OrderBy(row => row.IdBrokerNavigation.Lastname),
+        "CustomerName" => appointmentList.OrderBy(row => row.IdCustomerNavigation.Lastname),
+        "DateTime" => appointmentList.OrderBy(row => row.DateHour),
+        _ => appointmentList.OrderBy(row => row.IdBrokerNavigation.Lastname),
+      };
+      return View(appointmentList);
     }
 
     // GET-Details
@@ -69,15 +76,20 @@ namespace brokerAgenda.Controllers
     // POST-Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(AppointmentVM obj)
+    public IActionResult Create(Appointment appointment)
     {
       if (ModelState.IsValid)
       {
-        _db.Appointments.Add(obj.Appointment);
+        _db.Appointments.Add(appointment);
         _db.SaveChanges();
+        TempData["modifiedId"] = appointment.Id;
+        TempData["modification"] = "create";
+        Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
+        TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
+        TempData["dateTime"] = appointment.DateHour;
         return RedirectToAction("Index");
       }
-      return View(obj);
+      return View(appointment);
 
     }
   }
