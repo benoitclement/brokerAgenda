@@ -8884,24 +8884,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Benoît\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Benoît\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Benoît\\code\\lamanu\\exos\\brokerage_firm\\brokerAgenda\\brokerAgenda\\brokerAgenda.csproj",
+      "projectUniqueName": "C:\\Users\\Benoît\\code\\lamanu\\brokerAgenda\\brokerAgenda\\brokerAgenda.csproj",
       "projectName": "brokerAgenda",
-      "projectPath": "C:\\Users\\Benoît\\code\\lamanu\\exos\\brokerage_firm\\brokerAgenda\\brokerAgenda\\brokerAgenda.csproj",
+      "projectPath": "C:\\Users\\Benoît\\code\\lamanu\\brokerAgenda\\brokerAgenda\\brokerAgenda.csproj",
       "packagesPath": "C:\\Users\\Benoît\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Benoît\\code\\lamanu\\exos\\brokerage_firm\\brokerAgenda\\brokerAgenda\\obj\\",
+      "outputPath": "C:\\Users\\Benoît\\code\\lamanu\\brokerAgenda\\brokerAgenda\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\Benoît\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8978,7 +8973,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

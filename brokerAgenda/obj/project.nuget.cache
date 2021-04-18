@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sH/16Obfjz/QxUzWF5sAr8qragtXPeGo9VLs3KHxsB3/Y9r0eZHb73XnOIg2fX079KXBE3OoVou2eTvlC74icA==",
+  "dgSpecHash": "W5f45E0iXwjmdogmg6zgHonEJSA2oqqvuk4SHzEu8az3bxOLw5t7U37wob2xIJ7XjIec1yWCsz4/7jEec/eOxQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Benoît\\code\\lamanu\\exos\\brokerage_firm\\brokerAgenda\\brokerAgenda\\brokerAgenda.csproj",
+  "projectFilePath": "C:\\Users\\Benoît\\code\\lamanu\\brokerAgenda\\brokerAgenda\\brokerAgenda.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Benoît\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Benoît\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
