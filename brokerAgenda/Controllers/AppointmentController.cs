@@ -76,21 +76,118 @@ namespace brokerAgenda.Controllers
     // POST-Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Appointment appointment)
+    public IActionResult Create(AppointmentVM appointmentVM)
     {
       if (ModelState.IsValid)
       {
-        _db.Appointments.Add(appointment);
+        _db.Appointments.Add(appointmentVM.Appointment);
         _db.SaveChanges();
-        TempData["modifiedId"] = appointment.Id;
+        TempData["modifiedId"] = appointmentVM.Appointment.Id;
         TempData["modification"] = "create";
+        Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointmentVM.Appointment.IdCustomer);
+        TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
+        TempData["dateTime"] = appointmentVM.Appointment.DateHour;
+        return RedirectToAction("Index");
+      }
+      return View(appointmentVM.Appointment);
+    }
+
+    //GET Delete
+    public IActionResult Delete(int? id)
+    {
+      if (id == null || id == 0)
+      {
+        return NotFound();
+      }
+      var appointment = _db.Appointments.Find(id);
+      if (appointment == null)
+      {
+        return NotFound();
+      }
+      AppointmentVM newAppointmentVM = new AppointmentVM()
+      {
+        Appointment = appointment,
+        BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
+        {
+          Text = broker.Lastname + " " + broker.Firstname,
+          Value = broker.Id.ToString()
+        }),
+        CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
+        {
+          Text = customer.Lastname + " " + customer.Firstname,
+          Value = customer.Id.ToString()
+        })
+      };
+      return View(newAppointmentVM);
+    }
+    
+    //POST Delete
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    //public IActionResult DeletePost(int? id)
+    public IActionResult DeletePost(AppointmentVM appointmentVM)
+    {
+      var appointment = _db.Appointments.Find(appointmentVM.Appointment.Id);
+      if (appointment == null)
+      {
+        return NotFound();
+      }
+      _db.Appointments.Remove(appointment);
+      _db.SaveChanges();
+      TempData["modification"] = "delete";
+      Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
+      TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
+      TempData["dateTime"] = appointment.DateHour;
+      TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
+      return RedirectToAction("Index");
+    }
+
+    // GET-Update
+    public IActionResult Update(int? id)
+    {
+      if (id == null || id == 0)
+      {
+        return NotFound();
+      }
+      var appointment = _db.Appointments.Find(id);
+      if (appointment == null)
+      {
+        return NotFound();
+      }
+      AppointmentVM newAppointmentVM = new AppointmentVM()
+      {
+        Appointment = appointment,
+        BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
+        {
+          Text = broker.Lastname + " " + broker.Firstname,
+          Value = broker.Id.ToString()
+        }),
+        CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
+        {
+          Text = customer.Lastname + " " + customer.Firstname,
+          Value = customer.Id.ToString()
+        })
+      };
+      return View(newAppointmentVM);
+    }
+
+    // POST-Update
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Update(AppointmentVM appointmentVM)
+    {
+      if (ModelState.IsValid)
+      {
+        var appointment = appointmentVM.Appointment;
+        _db.Appointments.Update(appointment);
+        _db.SaveChanges();
+        TempData["modification"] = "update";
         Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
         TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
         TempData["dateTime"] = appointment.DateHour;
         return RedirectToAction("Index");
       }
-      return View(appointment);
-
+      return View(appointmentVM);
     }
   }
 }

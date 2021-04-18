@@ -17,10 +17,17 @@ namespace brokerAgenda.Controllers
       _db = db;
     }
     //GET-index
-    public IActionResult Index(string SortOrder)
+    public IActionResult Index(string sortOrder, string searchString)
     {
+      //var customers = from c in _db.Customers select c;
+
       IEnumerable<Customer> customerList = _db.Customers;
-      customerList = SortOrder switch //new syntax for switch _ is default
+      if (!String.IsNullOrEmpty(searchString))
+      {
+        searchString = searchString.ToLower(); 
+        customerList = customerList.Where(c => c.Lastname.ToLower().Contains(searchString) || c.Firstname.ToLower().Contains(searchString));
+      }
+      customerList = sortOrder switch //new syntax for switch _ is default
       {
         "Id" => customerList.OrderBy(row => row.Id),
         "LastName" => customerList.OrderBy(row => row.Lastname),
