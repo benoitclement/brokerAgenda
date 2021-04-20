@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace brokerAgenda.Models.ViewModels
 {
-  public class AppointmentVM
+  public class AppointmentDropDownVM
   {
     public Appointment Appointment { get; set; }
     public IEnumerable<SelectListItem> BrokerDropDown { get; set; }

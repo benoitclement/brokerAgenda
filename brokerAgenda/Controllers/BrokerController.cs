@@ -1,5 +1,6 @@
 ﻿using brokerAgenda.Data;
 using brokerAgenda.Models;
+using brokerAgenda.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace brokerAgenda.Controllers
     {
       _db = db;
     }
+
     // GET-Index
     public IActionResult Index(string SortOrder)
     {
@@ -38,7 +40,17 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      return View(broker);
+      var appointmentList = _db.Appointments.Where(a => a.IdBroker == id);
+      foreach(Appointment appointment in appointmentList)
+      {
+        appointment.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
+      }
+      BrokerDetailsVM BrokerDetailsVM = new()
+      {
+        Broker = broker,
+        AppointmentList = appointmentList
+      };
+      return View(BrokerDetailsVM);
     }
 
     // GET-Create

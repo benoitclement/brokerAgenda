@@ -54,17 +54,34 @@ namespace brokerAgenda.Controllers
     }
 
     // Get-Create
-    public IActionResult Create()
+    public IActionResult Create(string brokerId, string customerId)
     {
-      AppointmentVM newAppointmentVM = new AppointmentVM()
+      SelectListItem itemBroker = new();
+      SelectListItem itemCustomer = new();
+      if(brokerId != null) 
+      {
+        Broker inputBroker = _db.Brokers.FirstOrDefault(b => b.Id.ToString() == brokerId);
+        itemBroker.Text = inputBroker.Firstname + " " + inputBroker.Lastname;
+        itemBroker.Value = brokerId;
+      }
+      if(customerId != null)
+      {
+        Customer inputCustomer = _db.Customers.FirstOrDefault(c => c.Id.ToString() == customerId);
+        itemCustomer.Text = inputCustomer.Firstname + " " + inputCustomer.Lastname;
+        itemCustomer.Value = customerId;
+      }
+      IEnumerable<SelectListItem> selectBroker = new[] { itemBroker };
+      IEnumerable<SelectListItem> selectCustomer = new[] { itemCustomer };
+
+      AppointmentDropDownVM newAppointmentVM = new()
       {
         Appointment = new Appointment(),
-        BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
+        BrokerDropDown = brokerId != null ? selectBroker : _db.Brokers.Select(broker => new SelectListItem
         {
           Text = broker.Lastname + " " + broker.Firstname,
           Value = broker.Id.ToString()
         }),
-        CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
+        CustomerDropDown = customerId != null ? selectCustomer : _db.Customers.Select(customer => new SelectListItem
         {
           Text = customer.Lastname + " " + customer.Firstname,
           Value = customer.Id.ToString()
@@ -76,7 +93,7 @@ namespace brokerAgenda.Controllers
     // POST-Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(AppointmentVM appointmentVM)
+    public IActionResult Create(AppointmentDropDownVM appointmentVM)
     {
       if (ModelState.IsValid)
       {
@@ -104,36 +121,48 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      AppointmentVM newAppointmentVM = new AppointmentVM()
-      {
-        Appointment = appointment,
-        BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
-        {
-          Text = broker.Lastname + " " + broker.Firstname,
-          Value = broker.Id.ToString()
-        }),
-        CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
-        {
-          Text = customer.Lastname + " " + customer.Firstname,
-          Value = customer.Id.ToString()
-        })
-      };
-      return View(newAppointmentVM);
+      appointment.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == appointment.IdBroker);
+      appointment.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
+      //Broker broker = _db.Brokers.FirstOrDefault(b => b.Id == appointment.IdBrokerNavigation.Id);
+      //Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomerNavigation.Id);
+      //AppointmentDetailsVM appointmentDetails = new AppointmentDetailsVM()
+      //{
+      //  Appointment = appointment,
+      //  BrokerName = broker.Firstname + " " + broker.Lastname,
+      //  CustomerName = customer.Firstname + " " + customer.Lastname
+      //};
+
+      //AppointmentDropDownVM newAppointmentVM = new AppointmentDropDownVM()
+      //{
+      //  Appointment = appointment,
+      //  BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
+      //  {
+      //    Text = broker.Lastname + " " + broker.Firstname,
+      //    Value = broker.Id.ToString()
+      //  }),
+      //  CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
+      //  {
+      //    Text = customer.Lastname + " " + customer.Firstname,
+      //    Value = customer.Id.ToString()
+      //  })
+      //};
+      return View(appointment);
     }
     
     //POST Delete
     [HttpPost]
     [ValidateAntiForgeryToken]
     //public IActionResult DeletePost(int? id)
-    public IActionResult DeletePost(AppointmentVM appointmentVM)
+    public IActionResult DeletePost(int? id)
     {
-      var appointment = _db.Appointments.Find(appointmentVM.Appointment.Id);
+      var appointment = _db.Appointments.Find(id);
       if (appointment == null)
       {
         return NotFound();
       }
       _db.Appointments.Remove(appointment);
       _db.SaveChanges();
+      TempData["Id"] = appointment.Id;
       TempData["modification"] = "delete";
       Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
       TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
@@ -154,7 +183,7 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      AppointmentVM newAppointmentVM = new AppointmentVM()
+      AppointmentDropDownVM newAppointmentVM = new AppointmentDropDownVM()
       {
         Appointment = appointment,
         BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
@@ -174,13 +203,14 @@ namespace brokerAgenda.Controllers
     // POST-Update
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Update(AppointmentVM appointmentVM)
+    public IActionResult Update(AppointmentDropDownVM appointmentVM)
     {
       if (ModelState.IsValid)
       {
         var appointment = appointmentVM.Appointment;
         _db.Appointments.Update(appointment);
         _db.SaveChanges();
+        TempData["modifiedId"] = appointment.Id;
         TempData["modification"] = "update";
         Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
         TempData["customerName"] = customer.Firstname + " " + customer.Lastname;
