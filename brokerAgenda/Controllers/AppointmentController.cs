@@ -54,21 +54,21 @@ namespace brokerAgenda.Controllers
     }
 
     // Get-Create
-    public IActionResult Create(string brokerId, string customerId)
+    public IActionResult Create(string BrokerId, string CustomerId)
     {
       SelectListItem itemBroker = new();
       SelectListItem itemCustomer = new();
-      if(brokerId != null) 
+      if(BrokerId != null) 
       {
-        Broker inputBroker = _db.Brokers.FirstOrDefault(b => b.Id.ToString() == brokerId);
+        Broker inputBroker = _db.Brokers.FirstOrDefault(b => b.Id.ToString() == BrokerId);
         itemBroker.Text = inputBroker.Firstname + " " + inputBroker.Lastname;
-        itemBroker.Value = brokerId;
+        itemBroker.Value = BrokerId;
       }
-      if(customerId != null)
+      if(CustomerId != null)
       {
-        Customer inputCustomer = _db.Customers.FirstOrDefault(c => c.Id.ToString() == customerId);
+        Customer inputCustomer = _db.Customers.FirstOrDefault(c => c.Id.ToString() == CustomerId);
         itemCustomer.Text = inputCustomer.Firstname + " " + inputCustomer.Lastname;
-        itemCustomer.Value = customerId;
+        itemCustomer.Value = CustomerId;
       }
       IEnumerable<SelectListItem> selectBroker = new[] { itemBroker };
       IEnumerable<SelectListItem> selectCustomer = new[] { itemCustomer };
@@ -76,15 +76,17 @@ namespace brokerAgenda.Controllers
       AppointmentDropDownVM newAppointmentVM = new()
       {
         Appointment = new Appointment(),
-        BrokerDropDown = brokerId != null ? selectBroker : _db.Brokers.Select(broker => new SelectListItem
+        BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
         {
           Text = broker.Lastname + " " + broker.Firstname,
-          Value = broker.Id.ToString()
+          Value = broker.Id.ToString(),
+          Selected = broker.Id.ToString() == BrokerId
         }),
-        CustomerDropDown = customerId != null ? selectCustomer : _db.Customers.Select(customer => new SelectListItem
+        CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
         {
           Text = customer.Lastname + " " + customer.Firstname,
-          Value = customer.Id.ToString()
+          Value = customer.Id.ToString(),
+          Selected = customer.Id.ToString() == CustomerId
         })
       };
       return View(newAppointmentVM);

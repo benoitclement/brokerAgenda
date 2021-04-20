@@ -27,13 +27,13 @@
         <div class="form-group row">
           <div class="col-3">
             <select asp-for="Appointment.IdBroker" asp-items="@Model.BrokerDropDown" class="form-control">
-              <option selected>-- Choisissez un courtier --</option>
+              @*<option selected>-- Choisissez un courtier --</option>*@
             </select>
             <span asp-validation-for="Appointment.IdBroker" class="text-danger"></span>
           </div>
           <div class="col-3">
             <select asp-for="Appointment.IdCustomer" asp-items="@Model.CustomerDropDown" class="form-control">
-              <option selected>-- Choisissez un client --</option>
+              @*<option selected>-- Choisissez un client --</option>*@
             </select>
             <span asp-validation-for="Appointment.IdCustomer" class="text-danger"></span>
           </div>
