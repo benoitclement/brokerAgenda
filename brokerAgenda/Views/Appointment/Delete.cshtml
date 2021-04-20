@@ -28,15 +28,9 @@
         <div class="form-group row">
           <div class="col-3">
             <input class="form-control" disabled value="@Model.IdBrokerNavigation.Firstname @Model.IdBrokerNavigation.Lastname"/>
-            @*<select asp-for="Appointment.IdBroker" asp-items="@Model.BrokerDropDown" class="form-control" disabled>
-              <option selected>-- Choisissez un courtier --</option>
-            </select>*@
           </div>
           <div class="col-3">
             <input class="form-control" disabled value="@Model.IdCustomerNavigation.Firstname @Model.IdCustomerNavigation.Lastname"/>
-            @*<select asp-for="Appointment.IdCustomer" asp-items="@Model.CustomerDropDown" class="form-control" disabled>
-              <option selected>-- Choisissez un client --</option>
-            </select>*@
           </div>
           <div class="col-3">
             <input type="text" asp-for="DateHour" value="@Model.DateHour" class="form-control" disabled />

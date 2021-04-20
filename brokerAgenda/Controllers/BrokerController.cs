@@ -19,10 +19,15 @@ namespace brokerAgenda.Controllers
     }
 
     // GET-Index
-    public IActionResult Index(string SortOrder)
+    public IActionResult Index(string sortOrder, string searchString)
     {
       IEnumerable<Broker> brokerList = _db.Brokers;
-      brokerList = SortOrder switch //new syntax for switch _ is default
+      if (!String.IsNullOrEmpty(searchString))
+      {
+        searchString = searchString.ToLower(); 
+        brokerList = brokerList.Where(b => b.Lastname.ToLower().Contains(searchString) || b.Firstname.ToLower().Contains(searchString));
+      }
+      brokerList = sortOrder switch //new syntax for switch _ is default
       {
         "Id" => brokerList.OrderBy(row => row.Id),
         "LastName" => brokerList.OrderBy(row => row.Lastname),
