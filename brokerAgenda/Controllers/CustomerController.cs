@@ -1,5 +1,6 @@
 ﻿using brokerAgenda.Data;
 using brokerAgenda.Models;
+using brokerAgenda.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,17 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      return View(customer);
+      var appointmentList = _db.Appointments.Where(a => a.IdCustomer == id);
+      foreach(Appointment appointment in appointmentList)
+      {
+        appointment.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == appointment.IdBroker);
+      }
+      CustomerDetailsVM customerDetailsVM = new()
+      {
+        Customer = customer,
+        AppointmentList = appointmentList
+      };
+      return View(customerDetailsVM);
     }
 
     // GET-Create

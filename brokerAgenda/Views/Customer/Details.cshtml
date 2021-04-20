@@ -1,4 +1,4 @@
-﻿@model Customer
+﻿@model brokerAgenda.Models.ViewModels.CustomerDetailsVM
 @{
   ViewData["Title"] = "Détails client";
 }
@@ -23,20 +23,50 @@
     </thead>
     <tbody>
       <tr>
-        <td width="30%">@Model.Lastname</td>
-        <td width="30%">@Model.Firstname</td>
-        <td width="30%">@Model.Mail</td>
-        <td width="30%">@Model.PhoneNumber</td>
-        <td width="30%">@Model.Budget</td>
+        <td width="30%">@Model.Customer.Lastname</td>
+        <td width="30%">@Model.Customer.Firstname</td>
+        <td width="30%">@Model.Customer.Mail</td>
+        <td width="30%">@Model.Customer.PhoneNumber</td>
+        <td width="30%">@Model.Customer.Budget</td>
         <td width="30%">
           <div class="col-6 d-inline-flex align-content-between w-100">
-            <a asp-controller="Customer" asp-action="Update" asp-route-Id="@Model.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
-            <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@Model.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+            <a asp-controller="Customer" asp-action="Update" asp-route-Id="@Model.Customer.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+            <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@Model.Customer.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+            <a asp-controller="Appointment" asp-action="Create" asp-route-CustomerId="@Model.Customer.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/add-appointment.svg" alt="add appointment icon" title="add appointment icon" />RDV</a>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
+  @{
+    if (Model.AppointmentList.Count() > 0)
+    {
+      <h4 class="text-primary mb-3">Rendez-vous du client</h4>
+      <table class="table table-bordered table-striped mb-5" style="width:100%">
+        <thead>
+          <tr>
+            <th>Nom du courtier</th>
+            <th>Date et heure</th>
+            <th>Sujet du rendez-vous</th>
+          </tr>
+        </thead>
+        <tbody>
+          @{ foreach (Appointment appointment in Model.AppointmentList)
+            {
+              <tr>
+                <td width="30%">@appointment.IdBrokerNavigation.Lastname @appointment.IdBrokerNavigation.Firstname</td>
+                <td width="30%">@appointment.DateHour.ToString("dd/MM/yyyy hh:mm")</td>
+                <td width="40%">@appointment.Subject</td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    } else
+      {
+        <h5>Aucun rendez-vous prévu</h5>
+      }
+  }
 
   <div class="form-group row mt-4">
     <a class="btn btn-success col-4 mx-auto" asp-area="" asp-controller="Customer" asp-action="Index">Retour</a>

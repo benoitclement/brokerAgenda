@@ -17,7 +17,7 @@ namespace brokerAgenda.Controllers
     {
       _db = db;
     }
-    public IActionResult Index(string SortOrder)
+    public IActionResult Index(string sortOrder, string searchString)
     {
       IEnumerable<Appointment> appointmentList = _db.Appointments;
       foreach (var appointment in appointmentList)
@@ -25,7 +25,17 @@ namespace brokerAgenda.Controllers
         appointment.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == appointment.IdBroker);
         appointment.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
       }
-      appointmentList = SortOrder switch //new syntax for switch _ is default
+      if (!String.IsNullOrEmpty(searchString))
+      {
+        searchString = searchString.ToLower();
+        appointmentList = appointmentList.Where(a =>
+          a.IdBrokerNavigation.Lastname.ToLower().Contains(searchString)
+          || a.IdBrokerNavigation.Firstname.ToLower().Contains(searchString)
+          || a.IdCustomerNavigation.Lastname.ToLower().Contains(searchString)
+          || a.IdCustomerNavigation.Firstname.ToLower().Contains(searchString)
+        );
+      }
+      appointmentList = sortOrder switch //new syntax for switch _ is default
       {
         "BrokerName" => appointmentList.OrderBy(row => row.IdBrokerNavigation.Lastname),
         "CustomerName" => appointmentList.OrderBy(row => row.IdCustomerNavigation.Lastname),
@@ -54,37 +64,20 @@ namespace brokerAgenda.Controllers
     }
 
     // Get-Create
-    public IActionResult Create(string brokerId, string customerId)
+    public IActionResult Create(int brokerId, int customerId)
     {
-      SelectListItem itemBroker = new();
-      SelectListItem itemCustomer = new();
-      if(brokerId != null) 
-      {
-        Broker inputBroker = _db.Brokers.FirstOrDefault(b => b.Id.ToString() == brokerId);
-        itemBroker.Text = inputBroker.Firstname + " " + inputBroker.Lastname;
-        itemBroker.Value = brokerId;
-      }
-      if(customerId != null)
-      {
-        Customer inputCustomer = _db.Customers.FirstOrDefault(c => c.Id.ToString() == customerId);
-        itemCustomer.Text = inputCustomer.Firstname + " " + inputCustomer.Lastname;
-        itemCustomer.Value = customerId;
-      }
-      IEnumerable<SelectListItem> selectBroker = new[] { itemBroker };
-      IEnumerable<SelectListItem> selectCustomer = new[] { itemCustomer };
-
       AppointmentDropDownVM newAppointmentVM = new()
       {
-        Appointment = new Appointment(),
-        BrokerDropDown = brokerId != null ? selectBroker : _db.Brokers.Select(broker => new SelectListItem
+        Appointment = new Appointment() { IdBroker = brokerId, IdCustomer = customerId },
+        BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
         {
           Text = broker.Lastname + " " + broker.Firstname,
-          Value = broker.Id.ToString()
+          Value = broker.Id.ToString(),
         }),
-        CustomerDropDown = customerId != null ? selectCustomer : _db.Customers.Select(customer => new SelectListItem
+        CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
         {
           Text = customer.Lastname + " " + customer.Firstname,
-          Value = customer.Id.ToString()
+          Value = customer.Id.ToString(),
         })
       };
       return View(newAppointmentVM);
@@ -123,36 +116,12 @@ namespace brokerAgenda.Controllers
       }
       appointment.IdBrokerNavigation = _db.Brokers.FirstOrDefault(b => b.Id == appointment.IdBroker);
       appointment.IdCustomerNavigation = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomer);
-      //Broker broker = _db.Brokers.FirstOrDefault(b => b.Id == appointment.IdBrokerNavigation.Id);
-      //Customer customer = _db.Customers.FirstOrDefault(c => c.Id == appointment.IdCustomerNavigation.Id);
-      //AppointmentDetailsVM appointmentDetails = new AppointmentDetailsVM()
-      //{
-      //  Appointment = appointment,
-      //  BrokerName = broker.Firstname + " " + broker.Lastname,
-      //  CustomerName = customer.Firstname + " " + customer.Lastname
-      //};
-
-      //AppointmentDropDownVM newAppointmentVM = new AppointmentDropDownVM()
-      //{
-      //  Appointment = appointment,
-      //  BrokerDropDown = _db.Brokers.Select(broker => new SelectListItem
-      //  {
-      //    Text = broker.Lastname + " " + broker.Firstname,
-      //    Value = broker.Id.ToString()
-      //  }),
-      //  CustomerDropDown = _db.Customers.Select(customer => new SelectListItem
-      //  {
-      //    Text = customer.Lastname + " " + customer.Firstname,
-      //    Value = customer.Id.ToString()
-      //  })
-      //};
       return View(appointment);
     }
     
     //POST Delete
     [HttpPost]
     [ValidateAntiForgeryToken]
-    //public IActionResult DeletePost(int? id)
     public IActionResult DeletePost(int? id)
     {
       var appointment = _db.Appointments.Find(id);
