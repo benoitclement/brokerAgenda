@@ -30,7 +30,6 @@
         <td width="30%">@Model.Budget</td>
         <td width="30%">
           <div class="col-6 d-inline-flex align-content-between w-100">
-            <a asp-controller="Customer" asp-action="Details" asp-route-Id="@Model.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="update icon" title="update icon" />Profil</a>
             <a asp-controller="Customer" asp-action="Update" asp-route-Id="@Model.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
             <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@Model.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
           </div>

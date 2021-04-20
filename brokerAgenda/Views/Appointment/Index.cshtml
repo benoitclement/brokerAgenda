@@ -49,7 +49,7 @@
             <td width="20%">@appointment.DateHour.ToString("dd-MM-yyyy hh:mm tt")</td>
             <td width="40%">
               <div class="col-6 d-inline-flex align-content-between w-100">
-
+                <a asp-controller="Appointment" asp-action="Details" asp-route-Id="@appointment.Id" class="btn btn-info d-inline-flex mx-1">Détails<img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="details icon" title="details icon" />Détails</a>
                 <a asp-controller="Appointment" asp-action="Update" asp-route-Id="@appointment.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
                 <a asp-controller="Appointment" asp-action="Delete" asp-route-Id="@appointment.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
               </div>
