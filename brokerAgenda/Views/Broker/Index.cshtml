@@ -47,7 +47,7 @@
             <td width="20%">@broker.Firstname</td>
             <td width="40%">
               <div class="col-6 d-inline-flex align-content-between w-100">
-                <a asp-controller="Broker" asp-action="Details" asp-route-Id="@broker.Id" class="btn btn-info d-inline-flex mx-1">Détails</a>
+                <a asp-controller="Broker" asp-action="Details" asp-route-Id="@broker.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="details icon" title="update icon" />Détails</a>
                 <a asp-controller="Broker" asp-action="Update" asp-route-Id="@broker.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
                 <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@broker.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
               </div>
