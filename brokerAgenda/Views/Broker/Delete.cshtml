@@ -40,10 +40,18 @@
           </div>
         </div>
         <div class="form-group row">
+          @if (!ViewBag.isAppointment)
+          {
           <div class="col-8 d-flex justify-content-between mx-auto mt-4">
-              <input type="submit" class="btn btn-danger col-4" value="Supprimer" />
-              <a asp-action="Index" class="btn btn-success col-4">Retour</a>
+            <input type="submit" class="btn btn-danger col-4" value="Supprimer" />
+            <a asp-action="Index" class="btn btn-success col-4">Retour</a>
           </div>
+          }
+          else
+          {
+            <a asp-action="Index" class="btn btn-success col-4 mx-auto mt-4">Retour</a>
+            <h5 class="text-center text-danger m-5">Ce courtier a un ou plusieurs rendez-vous qui lui sont associés. Veuillez supprimer les RDV avant de pouvoir supprimer l'entrée courtier.</h5>
+          }
         </div>
       </div>
     </div>

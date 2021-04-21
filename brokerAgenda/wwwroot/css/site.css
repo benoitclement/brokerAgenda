@@ -118,16 +118,20 @@ body {
 
 .created-entry {
   transition: background-color 2s;
-  border: 2px solid dodgerblue;
+/*  border: 2px solid dodgerblue;*/
   animation: fade_blue 2s linear 0s alternate;
   -webkit-animation: fade_blue 2s linear 0s alternate;
 }
 
 .updated-entry {
   transition: background-color 2s;
-  border: 2px solid limegreen;
+/*  border: 2px solid limegreen;*/
   animation: fade_green 2s linear 0s alternate;
   -webkit-animation: fade_green 2s linear 0s alternate;
+}
+.table-striped tbody tr:nth-of-type(odd).updated-entry{
+  animation: fade_green_grey 2s linear 0s alternate;
+  -webkit-animation: fade_green_grey 2s linear 0s alternate;
 }
 
 @-webkit-keyframes fade_blue {
@@ -170,6 +174,25 @@ body {
   }
 }
 
+@-webkit-keyframes fade_green_grey {
+  from {
+    background-color: limegreen;
+  }
+
+  to {
+    background-color: rgba(0,0,0,0.05);
+  }
+}
+
+@keyframes fade_green_grey {
+  from {
+    background-color: limegreen;
+  }
+
+  to {
+    background-color: rgba(0,0,0,0.05);
+  }
+}
 @keyframes details-slideLeft {
   0% {transform: translate(0);}
   10% {transform: translate(-460px);}

@@ -93,6 +93,7 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
+      ViewBag.isAppointment = _db.Appointments.Any(a => a.IdBroker == id);
       return View(broker);
     }
 
@@ -106,6 +107,9 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
+      // Check for appointments to prevent deletion if any
+      if (_db.Appointments.Any(a => a.IdBroker == id)) return RedirectToAction("Delete");
+
       _db.Brokers.Remove(broker);
       _db.SaveChanges();
       TempData["modification"] = "delete";

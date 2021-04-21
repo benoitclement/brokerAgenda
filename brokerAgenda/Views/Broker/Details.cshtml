@@ -28,9 +28,9 @@
         <td width="20%">@Model.Broker.PhoneNumber</td>
         <td width="40%">
           <div class="col-6 d-inline-flex align-content-between w-100">
-            <a asp-controller="Broker" asp-action="Update" asp-route-Id="@Model.Broker.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
-            <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@Model.Broker.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
-            <a asp-controller="Appointment" asp-action="Create" asp-route-BrokerId="@Model.Broker.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/add-appointment.svg" alt="add appointment icon" title="add appointment icon" />RDV</a>
+            <a asp-controller="Broker" asp-action="Update" asp-route-Id="@Model.Broker.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-2" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+            <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@Model.Broker.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 16px" class="mr-2" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+            <a asp-controller="Appointment" asp-action="Create" asp-route-BrokerId="@Model.Broker.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 18px" class="mr-2" src="~/images/add-appointment.svg" alt="add appointment icon" title="add appointment icon" />RDV</a>
           </div>
         </td>
       </tr>

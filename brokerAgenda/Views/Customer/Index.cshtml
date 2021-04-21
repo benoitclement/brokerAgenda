@@ -15,9 +15,10 @@
   <div class="d-flex justify-content-between mb-3">
     <h2 class="text-primary">Liste des clients</h2>
     <form asp-controller="Customer" asp-action="Index" method="get">
-      <label for="search">Recherche</label>
-      <input type="text" id="search" name="SearchString" />
-      <input type="submit" value="Rechercher" />
+      <div class="input-group">
+        <input type="text" id="search" class="form-control input-group-prepend" name="SearchString" placeholder="Rechercher" aria-label="Rechercher" aria-describedby="btnGroupAddon"/>
+        <div class="input-group-append"><button class="btn btn-secondary" type="submit"><img src="~/images/search.svg" alt="search button" title="search button" style="width: 18px" class="mb-1 mx-2"/></button></div>
+      </div>
     </form>
   </div>
 
@@ -27,12 +28,12 @@
       <thead>
         <tr>
           <th>Id
-            <a asp-controller="Customer" asp-action="Index" asp-route-SortOrder="Id" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+            <a asp-controller="Customer" asp-action="Index" asp-route-SortOrder="Id" class="ml-2"><img style="width: 15px" class="mb-1" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
           <th>Nom de famille
-            <a asp-controller="Customer" asp-action="Index" asp-route-SortOrder="LastName" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+            <a asp-controller="Customer" asp-action="Index" asp-route-SortOrder="LastName" class="ml-2"><img style="width: 15px" class="mb-1" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
           </th>
           <th>Prénom
-            <a asp-controller="Customer" asp-action="Index" asp-route-SortOrder="FirstName" class="ml-2"><img style="width: 15px" class="" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
+            <a asp-controller="Customer" asp-action="Index" asp-route-SortOrder="FirstName" class="ml-2"><img style="width: 15px" class="mb-1" src="~/images/sort-descending.svg" alt="sort descending icon" title="sort descending icon" /></a>
           </th>
           <th>Modifications</th>
         </tr>
@@ -52,9 +53,9 @@
             <td width="20%">@customer.Firstname</td>
             <td width="40%">
               <div class="col-6 d-inline-flex align-content-between w-100">
-                <a asp-controller="Customer" asp-action="Details" asp-route-Id="@customer.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/info-circle-solid.svg" alt="details icon" title="details icon" />Détails</a>
-                <a asp-controller="Customer" asp-action="Update" asp-route-Id="@customer.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
-                <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@customer.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 20px" class="mr-1" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+                <a asp-controller="Customer" asp-action="Details" asp-route-Id="@customer.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-2" src="~/images/info-circle-solid.svg" alt="details icon" title="details icon" />Détails</a>
+                <a asp-controller="Customer" asp-action="Update" asp-route-Id="@customer.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-2" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
+                <a asp-controller="Customer" asp-action="Delete" asp-route-Id="@customer.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 16px" class="mr-2" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
               </div>
             </td>
           </tr>
