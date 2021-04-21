@@ -94,7 +94,7 @@ namespace brokerAgenda.Controllers
       {
         return NotFound();
       }
-      ViewBag.isAppointment = _db.Appointments.Any(a => a.IdBroker == id);
+      ViewBag.isAppointment = _db.Appointments.Any(a => a.IdCustomer == id);
       return View(customer);
     }
     
