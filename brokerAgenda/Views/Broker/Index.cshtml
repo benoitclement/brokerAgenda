@@ -52,9 +52,9 @@
             <td width="20%">@broker.Firstname</td>
             <td width="40%">
               <div class="col-6 d-inline-flex align-content-between w-100">
-                <a asp-controller="Broker" asp-action="Details" asp-route-Id="@broker.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-2" src="~/images/info-circle-solid.svg" alt="details icon" title="update icon" />Détails</a>
-                <a asp-controller="Broker" asp-action="Update" asp-route-Id="@broker.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-2" src="~/images/edit-solid.svg" alt="update icon" title="update icon" />Modifier</a>
-                <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@broker.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 16px" class="mr-2" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" />Supprimer</a>
+                <a asp-controller="Broker" asp-action="Details" asp-route-Id="@broker.Id" class="btn btn-info d-inline-flex mx-1"><img style="width: 20px" class="mr-lg-2" src="~/images/info-circle-solid.svg" alt="details icon" title="update icon" /><span class="icon-btn-text">Détails</span></a>
+                <a asp-controller="Broker" asp-action="Update" asp-route-Id="@broker.Id" class="btn btn-primary d-inline-flex mx-1"><img style="width: 20px" class="mr-lg-2" src="~/images/edit-solid.svg" alt="update icon" title="update icon" /><span class="icon-btn-text">Modifier</span></a>
+                <a asp-controller="Broker" asp-action="Delete" asp-route-Id="@broker.Id" class="btn btn-danger d-inline-flex mx-1"><img style="width: 16px" class="mr-lg-2" src="~/images/trash-solid.svg" alt="delete icon" title="delete icon" /><span class="icon-btn-text">Supprimer</span></a>
               </div>
             </td>
           </tr>
@@ -63,7 +63,7 @@
     </table>
   }
   <div class="mt-4">
-    <a class="btn btn-primary col-3" asp-area="" asp-controller="Broker" asp-action="Create">Ajouter un nouveau courtier</a>
+    <a class="btn btn-primary" asp-area="" asp-controller="Broker" asp-action="Create">Ajouter un nouveau courtier</a>
   </div>
 </div>
 @{

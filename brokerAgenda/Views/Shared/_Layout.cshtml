@@ -9,15 +9,11 @@
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
       <div class="container">
-        <a class="navbar-brand mr-5" asp-area="" asp-controller="Home" asp-action="Index">brokerAgenda</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-          <ul class="navbar-nav flex-grow-1">
+        <a class="navbar-brand m-0" asp-area="" asp-controller="Home" asp-action="Index">brokerAgenda</a>
+        <div class="navbar-collapse collapse">
+          <ul class="navbar-nav d-sm-inline-flex justify-content-center flex-grow-1">
             <li class="mr-2 shadow-sm">
               <a class="btn btn-light border-secondary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
             </li>
@@ -31,11 +27,15 @@
             </li>
             <li class="btn-group mr-2 shadow-sm">
               <a class="btn btn-light border-secondary" asp-area="" asp-controller="Appointment" asp-action="Index">Rendez-vous</a>
-              <a class="btn btn-light border-secondary" asp-area="" asp-controller="Appointment" asp-action="Create">Ajouter rendez-vous</a>
+              <a class="btn btn-light border-secondary" asp-area="" asp-controller="Appointment" asp-action="Create">Ajouter</a>
             </li>
           </ul>
-          <h5 class="m-0">@DateTime.Now.ToString("dd/MM/yyyy")</h5>
         </div>
+        <h5 class="m-0">@DateTime.Now.ToString("dd/MM/yyyy")</h5>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
     </nav>
   </header>

@@ -75,6 +75,7 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+/* Info overlay tooltip styles */
 .modification-container {
   position: fixed;
   overflow: hidden;
@@ -120,16 +121,15 @@ body {
   vertical-align: middle;
 }
 
+/* updated table line styles*/
 .created-entry {
   transition: background-color 2s;
-/*  border: 2px solid dodgerblue;*/
   animation: fade_blue 2s linear 0s alternate;
   -webkit-animation: fade_blue 2s linear 0s alternate;
 }
 
 .updated-entry {
   transition: background-color 2s;
-/*  border: 2px solid limegreen;*/
   animation: fade_green 2s linear 0s alternate;
   -webkit-animation: fade_green 2s linear 0s alternate;
 }
@@ -211,3 +211,8 @@ body {
   100% {transform: translate(0);}
 }
 
+@media screen and (max-width: 992px) {
+  .icon-btn-text {
+    display: none;
+  }
+}

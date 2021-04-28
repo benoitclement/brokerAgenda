@@ -38,7 +38,7 @@
             <span asp-validation-for="Appointment.IdCustomer" class="text-danger"></span>
           </div>
           <div class="col-3">
-            <input asp-for="Appointment.DateHour" min="2021-01-01T00:00" value="@DateTime.Now.ToString("dd-MM-yyyy hh tt")" class="form-control" />
+            <input asp-for="Appointment.DateHour" min="2021-01-01T00:00" value="@DateTime.Now.ToString("dd-MM-yyyy hh:mmtt")" class="form-control" />
             <span asp-validation-for="Appointment.DateHour" class="text-danger"></span>
           </div>
           <div class="col-3">
