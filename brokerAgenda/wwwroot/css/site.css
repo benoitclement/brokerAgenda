@@ -51,6 +51,10 @@ button.accept-policy {
   line-height: inherit;
 }
 
+.hover-filter-blue:hover {
+  filter: invert(43%) sepia(39%) saturate(2289%) hue-rotate(184deg) brightness(99%) contrast(88%);
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
