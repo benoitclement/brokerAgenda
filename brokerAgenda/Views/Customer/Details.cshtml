@@ -3,11 +3,9 @@
   ViewData["Title"] = "Détails client";
 }
 
-<div class="container p-3">
-  <div class="row pt-4">
-    <div class="col-6">
-      <h2 class="text-primary">Détail client</h2>
-    </div>
+<div class="container border p-3">
+  <div class="row pt-4 mb-3 col-6">
+    <h2 class="text-primary font-weight-normal">Détail client</h2>
   </div>
 
   <table class="table table-bordered table-striped" style="width:100%">
@@ -42,7 +40,7 @@
     if (Model.AppointmentList.Count() > 0)
     {
       <h4 class="text-primary mb-3">Rendez-vous du client</h4>
-      <table class="table table-bordered table-striped mb-5" style="width:100%">
+      <table class="table table-bordered table-striped mb-4" style="width:100%">
         <thead>
           <tr>
             <th>Nom du courtier</th>

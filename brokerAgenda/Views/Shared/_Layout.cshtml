@@ -15,7 +15,7 @@
         <div class="navbar-collapse collapse">
           <ul class="navbar-nav d-sm-inline-flex justify-content-center flex-grow-1">
             <li class="mr-2 shadow-sm">
-              <a class="btn btn-light border-secondary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+              <a class="btn btn-light border-secondary" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
             </li>
             <li class="btn-group mr-2 shadow-sm">
               <a class="btn btn-light border-secondary" asp-area="" asp-controller="Broker" asp-action="Index">Courtiers</a>
@@ -31,7 +31,7 @@
             </li>
           </ul>
         </div>
-        <h5 class="m-0">@DateTime.Now.ToString("dd/MM/yyyy")</h5>
+        <h5 class="m-0 font-weight-normal">@DateTime.Now.ToString("dd/MM/yyyy")</h5>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -58,7 +58,7 @@
   </div>
   <footer class="border-top footer bg-light text-muted">
     <div class="container">
-      &copy; 2021 - brokerAgenda - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+      &copy; 2021 - BrokerAgenda - <a asp-area="" asp-controller="Home" asp-action="Help">Guide d'utilisation</a>
     </div>
   </footer>
   <script src="~/lib/jquery/dist/jquery.min.js"></script>
