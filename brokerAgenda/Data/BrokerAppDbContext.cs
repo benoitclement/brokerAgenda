@@ -26,7 +26,7 @@ namespace brokerAgenda.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Name=BrokerAgendaDbConnection");
+                optionsBuilder.UseSqlServer("Name=localhost");
             }
         }
 
