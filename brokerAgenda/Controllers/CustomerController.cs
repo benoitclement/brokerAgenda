@@ -26,7 +26,7 @@ namespace brokerAgenda.Controllers
       if (!String.IsNullOrEmpty(searchString))
       {
         searchString = searchString.ToLower(); 
-        customerList = customerList.Where(c => c.Lastname.ToLower().Contains(searchString) || c.Firstname.ToLower().Contains(searchString));
+        customerList = customerList.Where(c => c.Lastname.ToLower().Contains(searchString) || c.Firstname.ToLower().Contains(searchString) || c.Id.ToString().Contains(searchString));
       }
       customerList = sortOrder switch //new syntax for switch _ is default
       {
