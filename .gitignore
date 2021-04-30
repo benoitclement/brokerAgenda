@@ -5,6 +5,8 @@
 
 # User-specific files
 *appsettings.json
+# For testing purposes TODO: remove
+brokerAgenda/appsettings.json
 *.rsuser
 *.suo
 *.user
